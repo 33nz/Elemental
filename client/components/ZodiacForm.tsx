@@ -8,9 +8,6 @@ export default function ZodiacForm() {
   const [day, setDay] = useState('')
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
-  const [hour, setHour] = useState('')
-  const [min, setMin] = useState('')
-  const [sec, setSec] = useState('')
 
   const { isAuthenticated, logout, loginWithRedirect } = useAuth0()
   const navigate = useNavigate()
@@ -22,7 +19,6 @@ export default function ZodiacForm() {
       loginWithRedirect()
     }
   }
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     // Handle form submission logic will go here
@@ -32,9 +28,9 @@ export default function ZodiacForm() {
       day: Number(day),
       month: Number(month),
       year: Number(year),
-      hour: Number(hour),
-      min: Number(min),
-      sec: Number(sec),
+      hour: 12,
+      min: 0,
+      sec: 0,
       gender: 'male',
       place: 'Auckland, New Zealand',
       lat: 36.8509,
@@ -61,24 +57,17 @@ export default function ZodiacForm() {
       case 'year':
         setYear(value)
         break
-      case 'hour':
-        setHour(value)
-        break
-      case 'min':
-        setMin(value)
-        break
-      case 'sec':
-        setSec(value)
-        break
-      default:
-        break
     }
   }
 
   return (
     <div>
       <div className="formDiv">
-        <button onClick={handleSignIn}>{isAuthenticated ? 'log-out' : 'Sign-Up'}</button>
+        <div className="buttonDiv">
+          <button onClick={handleSignIn}>
+            {isAuthenticated ? 'log-out' : 'Sign-Up'}
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Full Name: </label>
           <input
@@ -110,30 +99,6 @@ export default function ZodiacForm() {
             id="year"
             name="year"
             value={year}
-            onChange={handleChange}
-          />
-          <label htmlFor="hour">Hour: </label>
-          <input
-            type="text"
-            id="hour"
-            name="hour"
-            value={hour}
-            onChange={handleChange}
-          />
-          <label htmlFor="min">Minute: </label>
-          <input
-            type="text"
-            id="min"
-            name="min"
-            value={min}
-            onChange={handleChange}
-          />
-          <label htmlFor="sec">Second: </label>
-          <input
-            type="text"
-            id="sec"
-            name="sec"
-            value={sec}
             onChange={handleChange}
           />
           <div className="buttonDiv">
